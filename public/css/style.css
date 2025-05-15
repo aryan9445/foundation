@@ -1,0 +1,106 @@
+/* Loading Screen Animation */
+#loading-screen {
+    transition: opacity 0.5s ease-out;
+}
+
+/* Custom Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Apply animations to sections */
+section {
+    animation: fadeIn 1s ease-out;
+}
+
+.hero-content {
+    animation: slideUp 1s ease-out;
+}
+
+/* Mobile Menu Transitions */
+.mobile-menu {
+    transition: transform 0.3s ease-out;
+}
+
+.mobile-menu.hidden {
+    transform: translateX(100%);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Image Hover Effects */
+.success-story-card {
+    transition: transform 0.3s ease-out;
+}
+
+.success-story-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Button Hover Effects */
+.btn-hover-effect {
+    transition: all 0.3s ease-out;
+}
+
+.btn-hover-effect:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Input Styles */
+.form-input {
+    transition: border-color 0.3s ease-out;
+}
+
+.form-input:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Accessibility Improvements */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .no-print {
+        display: none !important;
+    }
+    
+    body {
+        font-size: 12pt;
+    }
+    
+    a {
+        text-decoration: none;
+        color: black;
+    }
+} 

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donate - Paws of Hope</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation (same as index.html) -->
+    <nav class="bg-white shadow-lg fixed w-full z-40">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="/" class="text-2xl font-bold text-blue-600">Paws of Hope</a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="/" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md">Home</a>
+                        <a href="/about" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md">About</a>
+                        <a href="/campaigns" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md">Campaigns</a>
+                        <a href="/donate" class="text-blue-600 px-3 py-2 rounded-md">Donate</a>
+                        <a href="/volunteer" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md">Volunteer</a>
+                        <a href="/contact" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md">Contact</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button class="mobile-menu-button p-2 rounded-md hover:bg-gray-100">
+                        <i class="fas fa-bars text-gray-600"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Donation Hero Section -->
+    <section class="pt-32 pb-20 bg-blue-600">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center text-white">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4">Make a Difference Today</h1>
+                <p class="text-xl md:text-2xl mb-8">Your donation helps us rescue and care for more stray dogs</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Donation Form Section -->
+    <section class="py-20">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="bg-white rounded-lg shadow-xl p-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Donation Options -->
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-800 mb-6">Choose Your Donation</h2>
+                        
+                        <!-- One-time vs Recurring -->
+                        <div class="mb-6">
+                            <div class="flex space-x-4 mb-4">
+                                <button class="donation-type-btn active px-4 py-2 rounded-full bg-blue-600 text-white">
+                                    One-time
+                                </button>
+                                <button class="donation-type-btn px-4 py-2 rounded-full bg-gray-200 text-gray-700">
+                                    Monthly
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Amount Selection -->
+                        <div class="mb-6">
+                            <h3 class="text-lg font-semibold mb-4">Select Amount</h3>
+                            <div class="grid grid-cols-3 gap-4">
+                                <button class="amount-btn px-4 py-2 rounded-lg border-2 border-gray-200 hover:border-blue-600" onclick="selectAmount(50)">
+                                    ₹50
+                                </button>
+                                <button class="amount-btn px-4 py-2 rounded-lg border-2 border-gray-200 hover:border-blue-600" onclick="selectAmount(100)">
+                                    ₹100
+                                </button>
+                                <button class="amount-btn px-4 py-2 rounded-lg border-2 border-gray-200 hover:border-blue-600" onclick="selectAmount(200)">
+                                    ₹200
+                                </button>
+                                <button class="amount-btn px-4 py-2 rounded-lg border-2 border-gray-200 hover:border-blue-600" onclick="selectAmount(500)">
+                                    ₹500
+                                </button>
+                                <button class="amount-btn px-4 py-2 rounded-lg border-2 border-gray-200 hover:border-blue-600" onclick="selectAmount(1000)">
+                                    ₹1,000
+                                </button>
+                                <div class="relative">
+                                    <span class="absolute left-3 top-2 text-gray-500">₹</span>
+                                    <input type="number" id="custom-amount" placeholder="Custom" class="w-full px-4 py-2 rounded-lg border-2 border-gray-200 pl-8" min="50" step="50">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Donor Information -->
+                        <div class="mb-6">
+                            <h3 class="text-lg font-semibold mb-4">Your Information</h3>
+                            <form id="donation-form">
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-gray-700 mb-2">Full Name</label>
+                                        <input type="text" id="donor-name" class="w-full px-4 py-2 rounded-lg border-2 border-gray-200 form-input" required>
+                                    </div>
+                                    <div>
+                                        <label class="block text-gray-700 mb-2">Email</label>
+                                        <input type="email" id="donor-email" class="w-full px-4 py-2 rounded-lg border-2 border-gray-200 form-input" required>
+                                    </div>
+                                    <div>
+                                        <label class="block text-gray-700 mb-2">Phone</label>
+                                        <input type="tel" id="donor-phone" class="w-full px-4 py-2 rounded-lg border-2 border-gray-200 form-input" required>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Payment Section -->
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-800 mb-6">Payment Details</h2>
+                        
+                        <!-- Donation Summary -->
+                        <div class="bg-gray-50 rounded-lg p-6 mb-6">
+                            <h3 class="text-lg font-semibold mb-4">Donation Summary</h3>
+                            <div class="space-y-2">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Amount</span>
+                                    <span class="font-semibold">₹<span id="donation-amount">0</span></span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Processing Fee</span>
+                                    <span class="font-semibold">₹<span id="processing-fee">0</span></span>
+                                </div>
+                                <div class="border-t border-gray-200 my-2"></div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-800 font-semibold">Total</span>
+                                    <span class="font-semibold">₹<span id="total-amount">0</span></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button id="submit-donation" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300 btn-hover-effect">
+                            Complete Donation
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (same as index.html) -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Paws of Hope</h3>
+                    <p class="text-gray-400">Making a difference in the lives of stray dogs, one paw at a time.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="/about" class="text-gray-400 hover:text-white">About Us</a></li>
+                        <li><a href="/campaigns" class="text-gray-400 hover:text-white">Campaigns</a></li>
+                        <li><a href="/volunteer" class="text-gray-400 hover:text-white">Volunteer</a></li>
+                        <li><a href="/contact" class="text-gray-400 hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Connect With Us</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Newsletter</h4>
+                    <form class="space-y-4">
+                        <input type="email" placeholder="Enter your email" class="w-full px-4 py-2 rounded bg-gray-700 text-white">
+                        <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded w-full">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 Paws of Hope. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/main.js"></script>
+    <script>
+        let selectedAmount = 0;
+        const processingFeeRate = 0.02; // 2% processing fee
+
+        function selectAmount(amount) {
+            selectedAmount = amount;
+            document.getElementById('donation-amount').textContent = amount.toLocaleString('en-IN');
+            updateTotal();
+            
+            // Update button styles
+            document.querySelectorAll('.amount-btn').forEach(btn => {
+                btn.classList.remove('bg-blue-600', 'text-white');
+                btn.classList.add('border-gray-200');
+            });
+            event.target.classList.add('bg-blue-600', 'text-white');
+            event.target.classList.remove('border-gray-200');
+        }
+
+        function updateTotal() {
+            const processingFee = Math.round(selectedAmount * processingFeeRate);
+            const total = selectedAmount + processingFee;
+            
+            document.getElementById('processing-fee').textContent = processingFee.toLocaleString('en-IN');
+            document.getElementById('total-amount').textContent = total.toLocaleString('en-IN');
+        }
+
+        // Handle custom amount input
+        document.getElementById('custom-amount').addEventListener('input', function(e) {
+            const amount = parseInt(e.target.value) || 0;
+            if (amount >= 50) {
+                selectedAmount = amount;
+                document.getElementById('donation-amount').textContent = amount.toLocaleString('en-IN');
+                updateTotal();
+                
+                // Reset button styles
+                document.querySelectorAll('.amount-btn').forEach(btn => {
+                    btn.classList.remove('bg-blue-600', 'text-white');
+                    btn.classList.add('border-gray-200');
+                });
+            }
+        });
+
+        // Handle donation type buttons
+        document.querySelectorAll('.donation-type-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.donation-type-btn').forEach(b => {
+                    b.classList.remove('bg-blue-600', 'text-white');
+                    b.classList.add('bg-gray-200', 'text-gray-700');
+                });
+                this.classList.remove('bg-gray-200', 'text-gray-700');
+                this.classList.add('bg-blue-600', 'text-white');
+            });
+        });
+
+        // Initialize Razorpay
+        const razorpayKey = 'YOUR_RAZORPAY_KEY_ID'; // Replace with your actual key
+
+        function initPayment(amount) {
+            const options = {
+                key: razorpayKey,
+                amount: amount * 100, // Razorpay expects amount in paise
+                currency: 'INR',
+                name: 'Paws of Hope',
+                description: 'Donation for Stray Dogs',
+                handler: function(response) {
+                    // Handle successful payment
+                    console.log('Payment successful:', response);
+                    window.location.href = '/donation-success.html';
+                },
+                prefill: {
+                    name: document.getElementById('donor-name').value,
+                    email: document.getElementById('donor-email').value,
+                    contact: document.getElementById('donor-phone').value
+                },
+                theme: {
+                    color: '#2563EB'
+                },
+                modal: {
+                    ondismiss: function() {
+                        // Handle payment cancellation
+                        console.log('Payment cancelled');
+                        // Re-enable the form
+                        document.getElementById('donation-form').reset();
+                        document.querySelectorAll('button').forEach(btn => btn.disabled = false);
+                        // Show a message to the user
+                        alert('Payment was cancelled. You can try again or choose a different amount.');
+                    }
+                }
+            };
+
+            try {
+                const rzp = new Razorpay(options);
+                rzp.on('payment.failed', function(response) {
+                    // Handle payment failure
+                    console.log('Payment failed:', response.error);
+                    alert('Payment failed. Please try again or contact support if the issue persists.');
+                    // Re-enable the form
+                    document.getElementById('donation-form').reset();
+                    document.querySelectorAll('button').forEach(btn => btn.disabled = false);
+                });
+                rzp.open();
+            } catch (error) {
+                console.error('Error initializing Razorpay:', error);
+                alert('There was an error processing your payment. Please try again later.');
+                // Re-enable the form
+                document.getElementById('donation-form').reset();
+                document.querySelectorAll('button').forEach(btn => btn.disabled = false);
+            }
+        }
+
+        // Handle form submission
+        document.getElementById('submit-donation').addEventListener('click', function() {
+            // Disable form buttons to prevent double submission
+            document.querySelectorAll('button').forEach(btn => btn.disabled = true);
+            
+            // Initialize payment
+            initPayment(selectedAmount);
+        });
+    </script>
+</body>
+</html> 
